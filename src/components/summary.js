@@ -50,7 +50,7 @@ const columns = [
 ];
 
 
-const Summary = ({ revert ,rowsData,setSelectedNarratives}) => {
+const Summary = ({ revert ,rowsData,setSelectedNarratives,handleChange}) => {
   return (
     <Box sx={{ width: "100%" }}>
       <p className="mb-3">
@@ -84,7 +84,7 @@ const Summary = ({ revert ,rowsData,setSelectedNarratives}) => {
         onSelectionModelChange={setSelectedNarratives}
       />{" "}
       <div className="flex justify-end items-center mt-4 gap-2">
-        <Button variant="contained" onClick={() => {}}>
+        <Button variant="contained" onClick={() => {handleChange(null,"2")}}>
           Correct Output{" "}
         </Button>{" "}
         <Button variant="contained" onClick={() => {}}>

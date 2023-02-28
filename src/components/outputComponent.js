@@ -8,10 +8,9 @@ import TabPanel from "@mui/lab/TabPanel";
 import Summary from "./summary";
 import ErrorHighligtingCorrection from "./ErrorHighligtingCorrection";
 
-const OutputComponent = ({ clickRevertBack, inputData, correctionTable }) => {
+const OutputComponent = ({ clickRevertBack, inputData, correctionTable ,parasContent}) => {
   const [value, setValue] = React.useState("1");
   const [selectedNaratvies, setSelectedNarratives] = useState([]);
-  // console.log("fromoutputcomponent",inputData);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -27,10 +26,10 @@ const OutputComponent = ({ clickRevertBack, inputData, correctionTable }) => {
             </TabList>
           </Box>
           <TabPanel value="1">
-            <Summary revert={clickRevertBack} rowsData={correctionTable} setSelectedNarratives={setSelectedNarratives}/>
+            <Summary revert={clickRevertBack} rowsData={correctionTable} setSelectedNarratives={setSelectedNarratives} handleChange={handleChange}/>
           </TabPanel>
           <TabPanel value="2">
-            <ErrorHighligtingCorrection rows={correctionTable} selectedNaratvies={selectedNaratvies} setSelectedNarratives={setSelectedNarratives}/>
+            <ErrorHighligtingCorrection rows={correctionTable} selectedNaratvies={selectedNaratvies} setSelectedNarratives={setSelectedNarratives} parasContent={parasContent}/>
           </TabPanel>
         </TabContext>
       </Box>

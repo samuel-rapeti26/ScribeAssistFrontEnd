@@ -16,7 +16,7 @@ function App() {
     rules: false,
     userManual: false,
   });
-
+  const [parasContent, setParasContent] = useState([])
   const [paragraph, setParagraph] = useState("");
   const [data, setdata] = useState([]);
   const [table, setTable] = useState({});
@@ -55,7 +55,7 @@ function App() {
               ParagraphNum: response.data.output.ParagraphNum[key]
             })
           );
-          console.log("rowdata",rowdata);
+          setParasContent(data);
           setTable(rowdata);
           setSidebarItems({
             ...sidebarItems,
@@ -69,7 +69,7 @@ function App() {
       // setTable(await api.post("", { data }));
       // setTable(await api.get(""));
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
     console.log("table", table);
   };
@@ -211,6 +211,7 @@ function App() {
                 clickRevertBack={() => RevertBack()}
                 inputData={paragraph}
                 correctionTable={table}
+                parasContent={parasContent}
               />
             )}
             {sidebarItems.rules && (
