@@ -153,8 +153,8 @@ const ViewDictonary = ({ clickRevertBack }) => {
             >
               <MenuItem value={1}>1. Updated Dictionary (Additional)</MenuItem>
               <MenuItem value={2}>2. Accepted Abbreviations</MenuItem>
-              <MenuItem value={3}>3. Sanofi Product List</MenuItem>
-              <MenuItem value={4}>4. Sanofi Unit Code (R3)</MenuItem>
+              <MenuItem value={3}>3. Product List</MenuItem>
+              <MenuItem value={4}>4. Unit Code (R3)</MenuItem>
             </Select>
           </FormControl>
         </Box>
@@ -167,7 +167,7 @@ const ViewDictonary = ({ clickRevertBack }) => {
                 rows={rows1}
                 columns={columns1}
                 autoHeight
-                pageSize={5}
+                pageSize={10}
                 rowsPerPageOptions={[5]}
                 checkboxSelection
                 disableSelectionOnClick
@@ -179,7 +179,7 @@ const ViewDictonary = ({ clickRevertBack }) => {
                 rows={rows2}
                 columns={columns2}
                 autoHeight
-                pageSize={5}
+                pageSize={10}
                 rowsPerPageOptions={[5]}
                 checkboxSelection
                 disableSelectionOnClick
@@ -191,7 +191,7 @@ const ViewDictonary = ({ clickRevertBack }) => {
                 rows={rows3}
                 columns={columns3}
                 autoHeight
-                pageSize={5}
+                pageSize={10}
                 rowsPerPageOptions={[5]}
                 checkboxSelection
                 disableSelectionOnClick
@@ -203,7 +203,7 @@ const ViewDictonary = ({ clickRevertBack }) => {
                 rows={rows4}
                 columns={columns4}
                 autoHeight
-                pageSize={5}
+                pageSize={10}
                 rowsPerPageOptions={[5]}
                 checkboxSelection
                 disableSelectionOnClick

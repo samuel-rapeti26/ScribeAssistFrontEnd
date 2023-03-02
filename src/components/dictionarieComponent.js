@@ -15,6 +15,8 @@ import RulesPdf from "../assets/Sanofi - Narrative QC Tool - Scenarios.pdf";
 const DictionarieComponent = ({ clickRevertBack }) => {
   const [value, setValue] = React.useState("1");
 
+  const role = sessionStorage.getItem("role");
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -27,7 +29,7 @@ const DictionarieComponent = ({ clickRevertBack }) => {
             <TabList onChange={handleChange} aria-label="lab API tabs example">
               <Tab label="Rules" value="1" />
               <Tab label="View Dictionary" value="2" />
-              <Tab label="Modify Dictionary" value="3" />
+              {role==="Admin" &&<Tab label="Modify Dictionary" value="3" />}
             </TabList>
           </Box>
           <TabPanel value="1">
@@ -48,9 +50,10 @@ const DictionarieComponent = ({ clickRevertBack }) => {
           <TabPanel value="2">
             <ViewDictonary />
           </TabPanel>
+          {role==="Admin" &&
           <TabPanel value="3">
             <ModifyDictonary/>
-          </TabPanel>
+          </TabPanel>}
         </TabContext>
       </Box>
     </Paper>

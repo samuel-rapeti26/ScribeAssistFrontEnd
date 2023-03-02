@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
@@ -8,12 +8,18 @@ import TabPanel from "@mui/lab/TabPanel";
 import Summary from "./summary";
 import ErrorHighligtingCorrection from "./ErrorHighligtingCorrection";
 
-const OutputComponent = ({ clickRevertBack, inputData, correctionTable ,parasContent}) => {
+const OutputComponent = ({
+  clickRevertBack,
+  inputData,
+  correctionTable,
+  parasContent,
+}) => {
   const [value, setValue] = React.useState("1");
   const [selectedNaratvies, setSelectedNarratives] = useState([]);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  
 
   return (
     <Paper elevation={3}>
@@ -26,10 +32,23 @@ const OutputComponent = ({ clickRevertBack, inputData, correctionTable ,parasCon
             </TabList>
           </Box>
           <TabPanel value="1">
-            <Summary revert={clickRevertBack} rowsData={correctionTable} setSelectedNarratives={setSelectedNarratives} handleChange={handleChange}/>
+            <Summary
+              // selected={selected}
+              revert={clickRevertBack}
+              rowsData={correctionTable}
+              selectedNaratvies={selectedNaratvies}
+              setSelectedNarratives={setSelectedNarratives}
+              handleChange={handleChange}
+            />
           </TabPanel>
           <TabPanel value="2">
-            <ErrorHighligtingCorrection rows={correctionTable} selectedNaratvies={selectedNaratvies} setSelectedNarratives={setSelectedNarratives} parasContent={parasContent}/>
+            <ErrorHighligtingCorrection
+              // selected={selected}
+              rows={correctionTable}
+              selectedNaratvies={selectedNaratvies}
+              setSelectedNarratives={setSelectedNarratives}
+              parasContent={parasContent}
+            />
           </TabPanel>
         </TabContext>
       </Box>

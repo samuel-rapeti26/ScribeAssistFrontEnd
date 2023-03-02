@@ -8,10 +8,10 @@ const SuggestionContent = ({ paragraphs ,selectedNaratvies,parasContent}) => {
   },[paragraphs,selectedNaratvies]);
   const highlightSuggestions = () => {
     const map={};
-     selectedRows.forEach((paragraph) => {
-      let { paraContent, error, suggestion } = paragraph;
+     selectedRows.filter(row => row.FrontendAction === "Replace").forEach((paragraph) => {
+      let { paraContent, error, suggestion, StartPos } = paragraph;
       paraContent= map[paragraph.ParagraphNum]|| paraContent;
-      const errorPos = paraContent.indexOf(error);
+      const errorPos = paraContent.indexOf(error,StartPos);
 
       // If the error is not found in the paragraph, skip it
       if (errorPos === -1) {

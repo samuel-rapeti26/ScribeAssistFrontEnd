@@ -8,10 +8,10 @@ const FinalNarrative = ({ paragraphs,selectedNaratvies,parasContent }) => {
   },[paragraphs,selectedNaratvies]);
   const highlightSuggestions = () => {
     const map={};
-    selectedRows.forEach((paragraph) => {
-      let { paraContent, error, suggestion } = paragraph;
+    selectedRows.filter(row => row.FrontendAction === "Replace").forEach((paragraph) => {
+      let { paraContent, error, suggestion, StartPos } = paragraph;
       paraContent= map[paragraph.ParagraphNum]|| paraContent;
-      const errorPos = paraContent.indexOf(error);
+      const errorPos = paraContent.indexOf(error,StartPos);
 
       // If the error is not found in the paragraph, skip it
       if (errorPos === -1) {
@@ -23,7 +23,7 @@ const FinalNarrative = ({ paragraphs,selectedNaratvies,parasContent }) => {
       const afterError = paraContent.substring(errorPos + error.length);
 
       // Wrap the suggestion in a span element with a "highlight" class
-      const suggestionSpan = `<span class="text-white bg-green-500 px-2 py-1">${suggestion.split("/")[0]}</span>`;
+      const suggestionSpan = `<span class="text-white bg-green-500 py-1">${suggestion.split("/")[0]}</span>`;
 
       // Concatenate all three parts to get the highlighted paragraph
       const highlightedParagraph = beforeError + suggestionSpan + afterError;

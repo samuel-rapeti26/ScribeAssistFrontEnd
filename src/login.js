@@ -19,6 +19,7 @@ function Login() {
     // console.log("pass", password);
   };
 
+  sessionStorage.setItem("user", User);
   const api = axios.create({
     withCredentials: true,
     baseURL: "http://localhost:2000/userlogin",
@@ -31,30 +32,18 @@ function Login() {
   const checkUser = async () => {
     try {
       const response = await api.post("", { User, Password });
-      // fetch("http://127.0.0.1:2000/userlogin",{method:"POST",body:JSON.stringify({User, Password}),headers:{'Content-Type':'application/json'}}).then(response=>{
-      //   console.log(response.headers);
-      //   navigate("/dashboard");
-      // }).catch(error=>{
-      //   setPassword("");
-      //   console.log(error);
-      // });
       console.log("response", response);
-      console.log("response.header", response.headers);
-      navigate("/dashboard");
+      sessionStorage.setItem("role", response.data.role);
+      if(response.data.message==="User Logged-in Successfully."){
+        navigate("/dashboard");
+      }
+      else {
+        alert("Incorrect ID or Password");
+      }
     } catch (e) {
       setPassword("");
       console.log(e);
     }
-    // axios
-    //   .post("http://127.0.0.1:2000/userlogin?User={userName}&Password={password}")
-    //   .then(function (response) {
-    //     setData(response.data);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
-
-    // console.log("data", data);
   };
 
   return (

@@ -63,7 +63,7 @@ function ModifyDictonary() {
     Accept: "*/*",
   };
 
-  useEffect(() => {
+  const fetchData = ()=>{
     try {
       axios
         .get("http://localhost:2000/temptable", { headers: headers1 })
@@ -85,7 +85,9 @@ function ModifyDictonary() {
     } catch (e) {
       console.log(e);
     }
-    console.log("table", table.data);
+  }
+  useEffect(() => {
+    fetchData();
   }, []);
 
   const onSelectionChange = (model) => {
@@ -112,6 +114,7 @@ function ModifyDictonary() {
         })
         .then((response) => {
           console.log("response", response);
+          alert("Word(s) added to the dictionary.");
         })
         .catch((error) => {
           console.log("error", error);
@@ -129,6 +132,8 @@ function ModifyDictonary() {
         })
         .then((response) => {
           console.log("response", response);
+          alert("Word(s) removed from the dictionary.");
+          fetchData();
         })
         .catch((error) => {
           console.log("error", error);
