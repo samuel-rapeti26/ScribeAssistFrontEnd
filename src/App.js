@@ -8,6 +8,8 @@ import ManualPdf from "./assets/Smart Error Detector Tool_User Manual_V1.0.0.pdf
 import "./style.css";
 import { IconButton } from "@mui/material";
 import Cookies from "js-cookie";
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function App() {
   const [sidebarItems, setSidebarItems] = useState({
@@ -22,7 +24,7 @@ function App() {
   const [table, setTable] = useState({});
   const key1 = Cookies.get("access_token_cookie");
   const key2 = Cookies.get("csrf_access_token");
-
+  const [loading, setLoading] = useState(false);
   axios.defaults.withCredentials = true;
 
   const headers1 = {
@@ -37,6 +39,7 @@ function App() {
     // console.log("datasplitt", data);
     const payload = { data };
     try {
+      setLoading(true);
       axios
         .post("http://localhost:2000/summary", payload, { headers: headers1 })
         .then((response) => {
@@ -62,9 +65,12 @@ function App() {
             output: true,
             input: false,
           });
+          
         })
         .catch((error) => {
           console.log("error", error);
+        }).finally(()=>{
+          setLoading(false);
         });
       // setTable(await api.post("", { data }));
       // setTable(await api.get(""));
@@ -79,7 +85,7 @@ function App() {
     console.log("narrative", narrativeFieldValue);
     setParagraph(narrativeFieldValue);
     // console.log("paragraph", paragraph);
-    const temp = narrativeFieldValue.split("\n");
+    const temp = narrativeFieldValue.split("\n").map(text => text+"\n");
     console.log("temp", temp);
     setdata(temp);
     // console.log("splitdata", data);
@@ -235,6 +241,13 @@ function App() {
           </div>
         </div>
       </div>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+        onClick={()=>{console.log("test98")}}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 }

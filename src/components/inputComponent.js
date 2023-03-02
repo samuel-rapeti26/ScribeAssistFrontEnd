@@ -10,7 +10,7 @@ const InputComponent = ({ clickProceed }) => {
   const [narrativeFieldValue, setNarrativeFieldValue] = useState("");
   const progress = "80%";
   const handleNarrativeChange = (event) => {
-    // console.log("frominputComponent",event.target.value);
+     console.log("frominputComponent98",event.target.value);
     setNarrativeFieldValue(event.target.value);
     if (narrativeFieldValue.length > 0) {
       setNarrativeFieldEdit(true);
@@ -18,7 +18,7 @@ const InputComponent = ({ clickProceed }) => {
       setNarrativeFieldEdit(false);
     }
   };
-
+  console.log("narrativeFieldValue98",narrativeFieldValue);
   return (
     <Paper elevation={3}>
       <div className="p-4">

@@ -8,7 +8,8 @@ const ErrorsContent = ({ paragraphs,parasContent}) => {
   },[paragraphs]);
   const highlightErrors = () => {
     const map={};
-     paragraphs.forEach((paragraph) => {
+    console.log(`paragraphs.filter(row => !row.error=="\n")98`,paragraphs.filter(row => row.error!=="\n"));
+     paragraphs.filter(row => row.error!=="\n").forEach((paragraph) => {
       let { paraContent,  error, suggestion,StartPos } = paragraph;
       paraContent= map[paragraph.ParagraphNum]|| paraContent;
       const errorPos = paraContent.indexOf(error,StartPos);
@@ -22,9 +23,7 @@ const ErrorsContent = ({ paragraphs,parasContent}) => {
       const afterError = paraContent.substring(errorPos + error.length);
       const errorSpan = `<span class="text-white bg-yellow-500 py-1">${error}</span>`;
       const highlightedParagraph = beforeError + errorSpan + afterError;
-      if(error== "is"){
-        console.log("paraContent, beforeError,afterError, errorPos98",paraContent, beforeError,afterError, errorPos);
-      }
+      
       map[paragraph.ParagraphNum]= highlightedParagraph;
     });
 

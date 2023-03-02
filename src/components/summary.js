@@ -110,7 +110,7 @@ const Summary = ({ revert ,rowsData,selectedNaratvies,setSelectedNarratives,hand
         rows={rowsData}
         columns={columns}
         autoHeight
-        pageSize={5}
+        pageSize={10}
         rowsPerPageOptions={[5]}
         checkboxSelection
         disableSelectionOnClick
@@ -125,9 +125,9 @@ const Summary = ({ revert ,rowsData,selectedNaratvies,setSelectedNarratives,hand
         <Button variant="contained" onClick={handleUpdateTable}>
           Update Dictonary(Selected words){" "}
         </Button>{" "}
-        <Button variant="contained" onClick={revert}>
+        {/* <Button variant="contained" onClick={revert}>
           Revert back{" "}
-        </Button>{" "}
+        </Button>{" "} */}
       </div>{" "}
     </Box>
   );

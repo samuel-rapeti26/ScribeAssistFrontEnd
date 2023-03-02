@@ -24,12 +24,15 @@ const ErrorHighligtingCorrection = ({
   const [correctOutput, setCorrectOutput] = useState([]);
   const [finalisedNarratives, setFinalisedNarratives] = useState([]);
   const columns = [
-    { field: "para", headerName: "Para", width: 90 },
+    {
+      field: "ParagraphNum",
+      headerName: "Paragraph Num",
+      flex: 1,
+    },
     {
       field: "error",
       headerName: "Error",
       flex: 1,
-      cellClassName: "highlight--cell",
     },
     {
       field: "suggestion",
@@ -41,34 +44,10 @@ const ErrorHighligtingCorrection = ({
       headerName: "Error Type",
       type: "number",
       flex: 1,
-    },
-    {
-      field: "category",
-      headerName: "Category",
-      flex: 1,
-    },
-    {
-      field: "StartPos",
-      headerName: "StartPos",
-      flex: 1,
-    },
-    {
-      field: "EndPos",
-      headerName: "EndPos",
-      flex: 1,
-    },
-    {
-      field: "operation",
-      headerName: "Operation",
-      flex: 1,
-    },
-    {
-      field: "frontEndAction",
-      headerName: "FrontendAction",
-      flex: 1,
+      align:'left',
+      headerAlign: 'left',
     },
   ];
-
   const correctOutputHandle = () => {
     if (selectedNaratvies.length > 0) {
       setFinalisedNarratives(selectedNaratvies);
@@ -136,7 +115,7 @@ const ErrorHighligtingCorrection = ({
             rows={rowsData}
             columns={columns}
             autoHeight
-            pageSize={5}
+            pageSize={10}
             rowsPerPageOptions={[5]}
             checkboxSelection
             disableSelectionOnClick
@@ -159,7 +138,7 @@ const ErrorHighligtingCorrection = ({
               {" "}
               Update dict{" "}
             </Button>
-            <Button variant="contained"> Revert back </Button>
+            {/* <Button variant="contained"> Revert back </Button> */}
           </div>
         </div>
         <div className="flex flex-col gap-4">
