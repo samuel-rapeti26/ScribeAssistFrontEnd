@@ -10,8 +10,12 @@ import { IconButton } from "@mui/material";
 import Cookies from "js-cookie";
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { useNavigate } from "react-router-dom";
 
 function App() {
+  const navigate = useNavigate();
   const [sidebarItems, setSidebarItems] = useState({
     input: true,
     output: false,
@@ -26,7 +30,6 @@ function App() {
   const key2 = Cookies.get("csrf_access_token");
   const [loading, setLoading] = useState(false);
   axios.defaults.withCredentials = true;
-
   const headers1 = {
     // "Accept": "application/json",
     // "Content-Type": "application/json",
@@ -101,7 +104,17 @@ function App() {
       input: true,
     });
   };
-
+  const [anchorEl, setAnchorEl] = useState(null);
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/", { replace: true })
+  };
   return (
     <div className="">
       <header className="py-3 bg-skyblue">
@@ -119,12 +132,29 @@ function App() {
                   edge="end"
                   aria-label="account of current user"
                   aria-haspopup="true"
-                  onClick={() => {}}
+                  onClick={handleMenu}
                   color="inherit"
                   className="text-white"
                 >
                   <AccountCircle className="text-white" />
                 </IconButton>
+                <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              </Menu>
               </div>
             </div>
           </div>

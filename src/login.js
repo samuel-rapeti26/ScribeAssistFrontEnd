@@ -75,15 +75,6 @@ function Login() {
         >
           Login
         </a>
-        <div className="flex mt-6 justify-center text-xs">
-          <a href="#" className="text-blue-400 hover:text-blue-500">
-            Forgot Password
-          </a>
-          <span className="mx-2 text-gray-300">/</span>
-          <a href="#" className="text-blue-400 hover:text-blue-500">
-            Sign Up
-          </a>
-        </div>
       </form>
     </div>
   );

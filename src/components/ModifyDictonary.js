@@ -9,21 +9,21 @@ function ModifyDictonary() {
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
     {
+      field: "Words",
+      headerName: "Words",
+      editable: true,
+      flex: 1,
+    },
+    {
       field: "Time",
       headerName: "Time",
-      editable: false,
+      editable: true,
       flex: 1,
     },
     {
       field: "User",
       headerName: "User",
-      editable: false,
-      flex: 1,
-    },
-    {
-      field: "Words",
-      headerName: "Words",
-      editable: false,
+      editable: true,
       flex: 1,
     },
   ];
@@ -122,6 +122,7 @@ function ModifyDictonary() {
     } catch (e) {
       console.log("error", e);
     }
+    fetchData();
   };
 
   const rejectwords = () => {
@@ -141,6 +142,7 @@ function ModifyDictonary() {
     } catch (e) {
       console.log("error", e);
     }
+    fetchData();
   };
 
   return (

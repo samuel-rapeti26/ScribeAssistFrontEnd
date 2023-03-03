@@ -1,6 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid, GridToolbarContainer, GridToolbarExport,useGridApiContext } from "@mui/x-data-grid";
 import { Button } from "@mui/material";
 import { FileCopy, Print, FileDownload } from "@mui/icons-material";
 import axios from "axios";
@@ -85,27 +85,38 @@ const Summary = ({ revert ,rowsData,selectedNaratvies,setSelectedNarratives,hand
       console.error(e);
     }
   };
-
+  function CustomToolbar() {
+    const apiRef = useGridApiContext();
+    const exportDataAsPrint = () => apiRef.current.exportDataAsPrint();
+    //  const exportDataAsExcel = () => apiRef.current.exportDataAsExcel();
+    // const exportDataAsPrint = () => apiRef.current.exportDataAsPrint();
+    // const exportDataAsPrint = () => apiRef.current.exportDataAsPrint();
+    return (
+      <GridToolbarContainer>
+        <div className="flex justify-start items-center mb-3 gap-2">
+        {/* <Button variant="outlined" onClick={() => {}}>
+          <FileCopy />
+        </Button> */}
+        <Button variant="outlined" onClick={exportDataAsPrint}>
+          <Print />
+        </Button>
+        {/* <Button variant="outlined" onClick={exportDataAsExcel}>
+          <FileDownload /> <span className="ms-1"> Download as Excel </span>
+        </Button>
+        <Button variant="outlined" onClick={() => {}}>
+          <FileDownload /> <span className="ms-1"> Download as PDF </span>
+        </Button> */}
+      </div>
+      </GridToolbarContainer>
+    );
+  }
   return (
     <Box sx={{ width: "100%" }}>
       <p className="mb-3">
         ** Select correct spelled words(which are shown as spelling errors) and
         add to dictionary.{" "}
       </p>{" "}
-      <div className="flex justify-start items-center mb-3 gap-2">
-        <Button variant="outlined" onClick={() => {}}>
-          <FileCopy />
-        </Button>{" "}
-        <Button variant="outlined" onClick={() => {}}>
-          <Print />
-        </Button>{" "}
-        <Button variant="outlined" onClick={() => {}}>
-          <FileDownload /> <span className="ms-1"> Download as Excel </span>{" "}
-        </Button>{" "}
-        <Button variant="outlined" onClick={() => {}}>
-          <FileDownload /> <span className="ms-1"> Download as PDF </span>{" "}
-        </Button>{" "}
-      </div>{" "}
+      
       <DataGrid
         rows={rowsData}
         columns={columns}
@@ -115,7 +126,7 @@ const Summary = ({ revert ,rowsData,selectedNaratvies,setSelectedNarratives,hand
         checkboxSelection
         disableSelectionOnClick
         experimentalFeatures={{ newEditingApi: true }}
-        components={{ Toolbar: GridToolbar }}
+        components={{ Toolbar: CustomToolbar }}
         onSelectionModelChange={setSelectedNarratives}
       />{" "}
       <div className="flex justify-end items-center mt-4 gap-2">

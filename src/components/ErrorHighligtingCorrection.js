@@ -106,7 +106,7 @@ const ErrorHighligtingCorrection = ({
       console.error(e);
     }
   };
-
+  
   return (
     <div className="flex flex-col gap-4">
       <div className="grid grid-cols-1  lg:grid-cols-2 gap-4 h-full">
@@ -187,11 +187,7 @@ const ErrorHighligtingCorrection = ({
               selectedNaratvies={correctOutput}
               parasContent={parasContent}
             />
-            <div className="flex justify-center items-center w-full">
-              <Button size="large" variant="contained">
-                Download doc.
-              </Button>
-            </div>
+            
           </div>
         )}
       </div>
