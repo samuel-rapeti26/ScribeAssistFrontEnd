@@ -141,7 +141,7 @@ const ErrorHighligtingCorrection = ({
             {/* <Button variant="contained"> Revert back </Button> */}
           </div>
         </div>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4" style={{ flex: 1, overflowY: 'auto', maxHeight:'720px' }}>
           <div
             className="shadow-md bg-white p-2 flex flex-col gap-2 "
             style={{ height: " -webkit-fill-available" }}
@@ -153,7 +153,7 @@ const ErrorHighligtingCorrection = ({
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1  lg:grid-cols-2 gap-4 h-full">
+      <div className="grid grid-cols-1  lg:grid-cols-2 gap-4 h-full" >
         {!!finalisedNarratives.length && (
           <div className="flex flex-col gap-4">
             <div className="shadow-md bg-white p-2 flex flex-col gap-2">
@@ -178,7 +178,7 @@ const ErrorHighligtingCorrection = ({
           </div>
         )}
         {!!correctOutput.length && (
-          <div className="shadow-md bg-white p-2 flex flex-col gap-2">
+          <div className="shadow-md bg-white p-2 flex flex-col gap-2" >
             <h2 className="text-xl text-gray-600 border-b pb-2">
               Final Narrative
             </h2>

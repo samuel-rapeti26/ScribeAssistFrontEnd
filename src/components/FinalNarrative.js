@@ -86,7 +86,7 @@ const FinalNarrative = ({ paragraphs,selectedNaratvies,parasContent }) => {
 
   return (
     <>
-    <div>
+    <div  style={{ flex: 1, overflowY: 'auto', maxHeight:'720px' }}>
       {parasContent.map((paragraph,i) => (
         <span key={i} dangerouslySetInnerHTML={{ __html: highlightedSuggestions[i+1]||paragraph }} />
       ))}

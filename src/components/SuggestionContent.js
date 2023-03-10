@@ -7,7 +7,7 @@ const SuggestionContent = ({ paragraphs ,selectedNaratvies,parasContent}) => {
     highlightSuggestions();
   },[paragraphs,selectedNaratvies]);
   const highlightSuggestions = () => {
-    console.log(`selectedRows.filter(row => row.FrontendAction === "Replace")98`,selectedRows.filter(row => row.FrontendAction === "Replace" && !row.error=="\n"));
+    // console.log(`selectedRows.filter(row => row.FrontendAction === "Replace")98`,selectedRows.filter(row => row.FrontendAction === "Replace" && !row.error=="\n"));
     const map={};
      selectedRows.filter(row => row.FrontendAction === "Replace" && row.error!=="\n").forEach((paragraph) => {
       let { paraContent, error, suggestion, StartPos } = paragraph;
@@ -23,7 +23,7 @@ const SuggestionContent = ({ paragraphs ,selectedNaratvies,parasContent}) => {
       // Split the paragraph into three parts: the text before the error, the error itself, and the text after the error
       const beforeError = paraContent.substring(0, errorPos);
       const afterError = paraContent.substring(errorPos + error.length);
-      console.log("suggestion98",suggestion);
+      // console.log("suggestion98",suggestion);
       const suggestions = Array.isArray(suggestion)?suggestion:suggestion.split("/");
       // Wrap the suggestion in a span element with a "highlight" class
       const suggestionSpan = `<span >${suggestions[0]}</span>`;
@@ -37,7 +37,7 @@ const SuggestionContent = ({ paragraphs ,selectedNaratvies,parasContent}) => {
     setHighlightedSuggestions(map);
   };
   return (
-    <div>
+    <div style={{ flex: 1, overflowY: 'auto', maxHeight:'720px' }}>
       {parasContent.map((paragraph,i) => (
         <span key={i} dangerouslySetInnerHTML={{ __html: highlightedSuggestions[i+1]||paragraph }} />
       ))}
