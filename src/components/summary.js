@@ -94,9 +94,9 @@ const Summary = ({ revert ,rowsData,selectedNaratvies,setSelectedNarratives,hand
     return (
       <GridToolbarContainer>
         <div className="flex justify-start items-center mb-3 gap-2">
-        {/* <Button variant="outlined" onClick={() => {}}>
+        <Button variant="outlined" onClick={() => {}}>
           <FileCopy />
-        </Button> */}
+        </Button>
         <Button variant="outlined" onClick={exportDataAsPrint}>
           <Print />
         </Button>
@@ -110,6 +110,7 @@ const Summary = ({ revert ,rowsData,selectedNaratvies,setSelectedNarratives,hand
       </GridToolbarContainer>
     );
   }
+  let filteredData= rowsData.filter(data=> data.error !== "\n");
   return (
     <Box sx={{ width: "100%" }}>
       <p className="mb-3">
@@ -118,7 +119,7 @@ const Summary = ({ revert ,rowsData,selectedNaratvies,setSelectedNarratives,hand
       </p>{" "}
       
       <DataGrid
-        rows={rowsData}
+        rows={filteredData}
         columns={columns}
         autoHeight
         pageSize={10}

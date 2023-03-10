@@ -106,13 +106,13 @@ const ErrorHighligtingCorrection = ({
       console.error(e);
     }
   };
-  
+  let filteredData= rowsData.filter(data=> data.error !== "\n");
   return (
     <div className="flex flex-col gap-4">
       <div className="grid grid-cols-1  lg:grid-cols-2 gap-4 h-full">
         <div className="flex flex-col gap-4">
           <DataGrid
-            rows={rowsData}
+            rows={filteredData}
             columns={columns}
             autoHeight
             pageSize={10}
