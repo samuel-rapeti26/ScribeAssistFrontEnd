@@ -23,31 +23,7 @@ const ErrorHighligtingCorrection = ({
   const [selected, setSelected] = React.useState({});
   const [correctOutput, setCorrectOutput] = useState([]);
   const [finalisedNarratives, setFinalisedNarratives] = useState([]);
-  const columns = [
-    {
-      field: "ParagraphNum",
-      headerName: "Paragraph Num",
-      flex: 1,
-    },
-    {
-      field: "error",
-      headerName: "Error",
-      flex: 1,
-    },
-    {
-      field: "suggestion",
-      headerName: "Suggestion",
-      flex: 1,
-    },
-    {
-      field: "errorType",
-      headerName: "Error Type",
-      type: "number",
-      flex: 1,
-      align:'left',
-      headerAlign: 'left',
-    },
-  ];
+  
   const correctOutputHandle = () => {
     if (selectedNaratvies.length > 0) {
       setFinalisedNarratives(selectedNaratvies);
@@ -107,6 +83,36 @@ const ErrorHighligtingCorrection = ({
     }
   };
   let filteredData= rowsData.filter(data=> data.error !== "\n");
+  let valueOptions = new Set();
+  filteredData.forEach(element => {
+    valueOptions.add(element.errorType)
+  });
+  const columns = [
+    {
+      field: "ParagraphNum",
+      headerName: "Paragraph Num",
+      flex: 1,
+    },
+    {
+      field: "error",
+      headerName: "Error",
+      flex: 1,
+    },
+    {
+      field: "suggestion",
+      headerName: "Suggestion",
+      flex: 1,
+    },
+    {
+      field: "errorType",
+      headerName: "Error Type",
+      type:"singleSelect",
+      valueOptions:[...valueOptions],
+      flex: 1,
+      align:'left',
+      headerAlign: 'left',
+    },
+  ];
   return (
     <div className="flex flex-col gap-4">
       <div className="grid grid-cols-1  lg:grid-cols-2 gap-4 h-full">
@@ -128,6 +134,7 @@ const ErrorHighligtingCorrection = ({
                 backgroundColor: "#90ee90",
               },
             }}
+            
           />
           <div className="w-full flex justify-end items-center px-4 gap-2">
             <Button variant="contained" onClick={correctOutputHandle}>
