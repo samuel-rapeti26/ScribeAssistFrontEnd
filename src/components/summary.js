@@ -42,31 +42,7 @@ const MyDoc = ({data=[]}) => (
   </Document>
 );
 
-const columns = [
-  {
-    field: "ParagraphNum",
-    headerName: "Paragraph Num",
-    flex: 1,
-  },
-  {
-    field: "error",
-    headerName: "Error",
-    flex: 1,
-  },
-  {
-    field: "suggestion",
-    headerName: "Suggestion",
-    flex: 1,
-  },
-  {
-    field: "errorType",
-    headerName: "Error Type",
-    type: "number",
-    flex: 1,
-    align:'left',
-    headerAlign: 'left',
-  },
-];
+
 
 
 const Summary = ({ revert ,rowsData,selectedNaratvies,setSelectedNarratives,handleChange}) => {
@@ -120,43 +96,39 @@ const Summary = ({ revert ,rowsData,selectedNaratvies,setSelectedNarratives,hand
       console.error(e);
     }
   };
-  let filteredData= rowsData.filter(data=> data.error !== "\n");
-
-  // ######### CUSTOM TOOLBAR
-  // function CustomToolbar() {
-  //   const apiRef = useGridApiContext();
-  //   const exportDataAsPrint = () => apiRef.current.exportDataAsPrint();
-  //   //  const exportDataAsExcel = () => apiRef.current.exportDataAsExcel();
-  //   // const exportDataAsPrint = () => apiRef.current.exportDataAsPrint();
-  //   // const exportDataAsPrint = () => apiRef.current.exportDataAsPrint();
-  //   return (
-  //     <GridToolbarContainer>
-  //       <div className="flex justify-start items-center mb-3 gap-2">
-  //       <Button variant="outlined" onClick={() => {}}>
-  //         <FileCopy />
-  //       </Button>
-  //       <Button variant="outlined" onClick={exportDataAsPrint}>
-  //         <Print />
-  //       </Button>
-  //       {/* <Button variant="outlined" onClick={exportDataAsExcel}>
-  //         <FileDownload /> <span className="ms-1"> Download as Excel </span>
-  //       </Button> */}
-  //         <>
-  //           <PDFDownloadLink document={<MyDoc data={filteredData} />} fileName="somename.pdf">
-  //             {({ blob, url, loading, error }) =>
-  //               loading ? 'Loading document...' : <Button variant="outlined" onClick={() => { }}>
-  //                 <FileDownload /> <span className="ms-1"> Download as PDF </span>
-  //               </Button>
-  //             }
-  //           </PDFDownloadLink>
-  //         </>
-        
-  //     </div>
-  //     </GridToolbarContainer>
-  //   );
-  // }
   
-  console.log("filteredData98",filteredData);
+  let filteredData= rowsData.filter(data=> data.error !== "\n");
+let valueOptions = new Set();
+filteredData.forEach(element => {
+  valueOptions.add(element.errorType)
+});
+
+const columns = [
+  {
+    field: "ParagraphNum",
+    headerName: "Paragraph Num",
+    flex: 1,
+  },
+  {
+    field: "error",
+    headerName: "Error",
+    flex: 1,
+  },
+  {
+    field: "suggestion",
+    headerName: "Suggestion",
+    flex: 1,
+  },
+  {
+    field: "errorType",
+    headerName: "Error Type",
+    type:"singleSelect",
+    valueOptions:[...valueOptions],
+    flex: 1,
+    align:'left',
+    headerAlign: 'left',
+  },
+];
   return (
     <Box sx={{ width: "100%" }}>
       <p className="mb-3">
