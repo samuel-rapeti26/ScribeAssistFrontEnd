@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { ContactlessOutlined, Mode } from "@mui/icons-material";
+import logo from "./assets/logo.png";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function Login() {
   const navigate = useNavigate();
   const [User, setUserName] = useState("");
   const [Password, setPassword] = useState("");
-  const [data, setData] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const callUserComponent = (event) => {
     setUserName(event.target.value);
@@ -31,15 +33,16 @@ function Login() {
 
   const checkUser = async () => {
     try {
+      setLoading(true);
       const response = await api.post("", { User, Password });
       console.log("response", response);
       sessionStorage.setItem("role", response.data.role);
-      if(response.data.message==="User Logged-in Successfully."){
+      if (response.data.message === "User Logged-in Successfully.") {
         navigate("/dashboard");
-      }
-      else {
+      } else {
         alert("Incorrect ID or Password");
       }
+      setLoading(false);
     } catch (e) {
       setPassword("");
       console.log(e);
@@ -47,9 +50,10 @@ function Login() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-screen h-screen bg-gray-200 text-gray-700">
+    <div className="flex  flex-col items-center justify-center w-screen h-screen bg-gray-200 text-gray-700">
+      <img src={logo} style={{ width: "300px" }} />
       <form
-        className="flex flex-col bg-white rounded shadow-lg p-12 mt-12"
+        className="flex flex-col bg-white rounded shadow-lg p-12 mt-6"
         action=""
       >
         <label className="font-semibold text-xs" for="usernameField">
@@ -69,13 +73,23 @@ function Login() {
           onChange={(event) => callPassComponent(event)}
         />
         <a
-          // href="./dashboard"
+          // href="./dashboard"\
+          style={{ cursor: "pointer" }}
           className="flex items-center justify-center h-12 px-6 w-64 bg-blue-600 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700"
           onClick={checkUser}
         >
           Login
         </a>
       </form>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+        onClick={() => {
+          console.log("test98");
+        }}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 }

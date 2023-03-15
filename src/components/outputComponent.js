@@ -19,7 +19,6 @@ const OutputComponent = ({
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  
 
   return (
     <Paper elevation={3}>

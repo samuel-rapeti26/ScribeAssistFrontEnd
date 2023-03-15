@@ -7,6 +7,8 @@ import FinalNarrative from "./FinalNarrative";
 import axios from "axios";
 import Cookies from "js-cookie";
 
+import "../assets/errorHighlightCorrection.css";
+
 const ErrorHighligtingCorrection = ({
   rows,
   selectedNaratvies,
@@ -23,7 +25,7 @@ const ErrorHighligtingCorrection = ({
   const [selected, setSelected] = React.useState({});
   const [correctOutput, setCorrectOutput] = useState([]);
   const [finalisedNarratives, setFinalisedNarratives] = useState([]);
-  
+
   const correctOutputHandle = () => {
     if (selectedNaratvies.length > 0) {
       setFinalisedNarratives(selectedNaratvies);
@@ -82,10 +84,10 @@ const ErrorHighligtingCorrection = ({
       console.error(e);
     }
   };
-  let filteredData= rowsData.filter(data=> data.error !== "\n");
+  let filteredData = rowsData.filter((data) => data.error !== "\n");
   let valueOptions = new Set();
-  filteredData.forEach(element => {
-    valueOptions.add(element.errorType)
+  filteredData.forEach((element) => {
+    valueOptions.add(element.errorType);
   });
   const columns = [
     {
@@ -106,11 +108,11 @@ const ErrorHighligtingCorrection = ({
     {
       field: "errorType",
       headerName: "Error Type",
-      type:"singleSelect",
-      valueOptions:[...valueOptions],
+      type: "singleSelect",
+      valueOptions: [...valueOptions],
       flex: 1,
-      align:'left',
-      headerAlign: 'left',
+      align: "left",
+      headerAlign: "left",
     },
   ];
   return (
@@ -133,8 +135,11 @@ const ErrorHighligtingCorrection = ({
               "& .highlight--cell": {
                 backgroundColor: "#90ee90",
               },
+              "& .MuiDataGrid-main": {
+                overflowY: "scroll",
+              },
+              maxHeight: "500px",
             }}
-            
           />
           <div className="w-full flex justify-end items-center px-4 gap-2">
             <Button variant="contained" onClick={correctOutputHandle}>
@@ -148,7 +153,7 @@ const ErrorHighligtingCorrection = ({
             {/* <Button variant="contained"> Revert back </Button> */}
           </div>
         </div>
-        <div className="flex flex-col gap-4" style={{ flex: 1, overflowY: 'auto', maxHeight:'720px' }}>
+        <div className="flex flex-col gap-4">
           <div
             className="shadow-md bg-white p-2 flex flex-col gap-2 "
             style={{ height: " -webkit-fill-available" }}
@@ -160,7 +165,7 @@ const ErrorHighligtingCorrection = ({
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1  lg:grid-cols-2 gap-4 h-full" >
+      <div className="grid grid-cols-1  lg:grid-cols-2 gap-4 h-full">
         {!!finalisedNarratives.length && (
           <div className="flex flex-col gap-4">
             <div className="shadow-md bg-white p-2 flex flex-col gap-2">
@@ -185,7 +190,7 @@ const ErrorHighligtingCorrection = ({
           </div>
         )}
         {!!correctOutput.length && (
-          <div className="shadow-md bg-white p-2 flex flex-col gap-2" >
+          <div className="shadow-md bg-white p-2 flex flex-col gap-2">
             <h2 className="text-xl text-gray-600 border-b pb-2">
               Final Narrative
             </h2>
@@ -194,7 +199,6 @@ const ErrorHighligtingCorrection = ({
               selectedNaratvies={correctOutput}
               parasContent={parasContent}
             />
-            
           </div>
         )}
       </div>

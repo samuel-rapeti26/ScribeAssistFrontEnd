@@ -1,9 +1,21 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import { DataGrid, GridToolbarContainer,GridToolbar, GridToolbarExport,useGridApiContext } from "@mui/x-data-grid";
-import { PDFDownloadLink, Document, Page, Text,View,StyleSheet  } from '@react-pdf/renderer';
+import {
+  DataGrid,
+  GridToolbarContainer,
+  GridToolbar,
+  GridToolbarExport,
+  useGridApiContext,
+} from "@mui/x-data-grid";
+import {
+  PDFDownloadLink,
+  Document,
+  Page,
+  Text,
+  View,
+  StyleSheet,
+} from "@react-pdf/renderer";
 import { Button } from "@mui/material";
-import { FileCopy, Print, FileDownload } from "@mui/icons-material";
 import axios from "axios";
 import Cookies from "js-cookie";
 import ItemsTable from "./ItemsTable";
@@ -21,35 +33,38 @@ const data = {
       desc: "desc2",
       xyz: 6,
     },
-  ],};
+  ],
+};
 const styles = StyleSheet.create({
   page: {
-    flexDirection: 'row',
-    backgroundColor: '#E4E4E4'
+    flexDirection: "row",
+    backgroundColor: "#E4E4E4",
   },
   section: {
     margin: 10,
     padding: 10,
-    flexGrow: 1
-  }
+    flexGrow: 1,
+  },
 });
 
-const MyDoc = ({data=[]}) => (
+const MyDoc = ({ data = [] }) => (
   <Document>
     <Page size="A4" style={styles.page}>
-    <ItemsTable data={data} />
+      <ItemsTable data={data} />
     </Page>
   </Document>
 );
 
-
-
-
-const Summary = ({ revert ,rowsData,selectedNaratvies,setSelectedNarratives,handleChange}) => {
-
+const Summary = ({
+  revert,
+  rowsData,
+  selectedNaratvies,
+  setSelectedNarratives,
+  handleChange,
+}) => {
   // console.log("hi",selectedNarratives);
   const [selected, setSelected] = React.useState({});
-  console.log("rowsData98",rowsData);
+  console.log("rowsData98", rowsData);
   const handleUpdateTable = () => {
     let word = [];
     let time = [];
@@ -96,46 +111,45 @@ const Summary = ({ revert ,rowsData,selectedNaratvies,setSelectedNarratives,hand
       console.error(e);
     }
   };
-  
-  let filteredData= rowsData.filter(data=> data.error !== "\n");
-let valueOptions = new Set();
-filteredData.forEach(element => {
-  valueOptions.add(element.errorType)
-});
 
-const columns = [
-  {
-    field: "ParagraphNum",
-    headerName: "Paragraph Num",
-    flex: 1,
-  },
-  {
-    field: "error",
-    headerName: "Error",
-    flex: 1,
-  },
-  {
-    field: "suggestion",
-    headerName: "Suggestion",
-    flex: 1,
-  },
-  {
-    field: "errorType",
-    headerName: "Error Type",
-    type:"singleSelect",
-    valueOptions:[...valueOptions],
-    flex: 1,
-    align:'left',
-    headerAlign: 'left',
-  },
-];
+  let filteredData = rowsData.filter((data) => data.error !== "\n");
+  let valueOptions = new Set();
+  filteredData.forEach((element) => {
+    valueOptions.add(element.errorType);
+  });
+
+  const columns = [
+    {
+      field: "ParagraphNum",
+      headerName: "Paragraph Num",
+      flex: 1,
+    },
+    {
+      field: "error",
+      headerName: "Error",
+      flex: 1,
+    },
+    {
+      field: "suggestion",
+      headerName: "Suggestion",
+      flex: 1,
+    },
+    {
+      field: "errorType",
+      headerName: "Error Type",
+      type: "singleSelect",
+      valueOptions: [...valueOptions],
+      flex: 1,
+      align: "left",
+      headerAlign: "left",
+    },
+  ];
   return (
     <Box sx={{ width: "100%" }}>
       <p className="mb-3">
         ** Select correct spelled words(which are shown as spelling errors) and
         add to dictionary.{" "}
       </p>{" "}
-      
       <DataGrid
         rows={filteredData}
         columns={columns}
@@ -149,7 +163,12 @@ const columns = [
         onSelectionModelChange={setSelectedNarratives}
       />{" "}
       <div className="flex justify-end items-center mt-4 gap-2">
-        <Button variant="contained" onClick={() => {handleChange(null,"2")}}>
+        <Button
+          variant="contained"
+          onClick={() => {
+            handleChange(null, "2");
+          }}
+        >
           Correct Output{" "}
         </Button>{" "}
         <Button variant="contained" onClick={handleUpdateTable}>
