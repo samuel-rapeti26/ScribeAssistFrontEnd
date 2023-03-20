@@ -87,7 +87,7 @@ function App() {
   const Proceed = (narrativeFieldValue) => {
     console.log("narrative", narrativeFieldValue);
     setParagraph(narrativeFieldValue);
-    const temp = narrativeFieldValue.split("\n").map(text => text+"\n");
+    const temp = narrativeFieldValue.split("\n").map(text => text).filter(text => (text !== "\n" && text.trim() !== '') );
     getCorrectionTable(temp);
   };
 
