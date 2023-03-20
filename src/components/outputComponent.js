@@ -7,13 +7,14 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import Summary from "./summary";
 import ErrorHighligtingCorrection from "./ErrorHighligtingCorrection";
+import { useSelector } from "react-redux";
 
 const OutputComponent = ({
   clickRevertBack,
-  inputData,
-  correctionTable,
   parasContent,
 }) => {
+  const { table: correctionTable } = useSelector(state => state.correctionTableReducer);
+  
   const [value, setValue] = React.useState("1");
   const [selectedNaratvies, setSelectedNarratives] = useState([]);
   const handleChange = (event, newValue) => {

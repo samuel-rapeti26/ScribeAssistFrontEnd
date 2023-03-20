@@ -1,21 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { Button } from "@mui/material";
 import ViewDictonary from "./viewDictonary";
 import ModifyDictonary from "./ModifyDictonary";
 import RulesPdf from "../assets/Sanofi - Narrative QC Tool - Scenarios.pdf";
 
-
 const DictionarieComponent = ({ clickRevertBack }) => {
   const [value, setValue] = React.useState("1");
-
-  const role = sessionStorage.getItem("role");
+  const { role } = useSelector((state) => state.userReducer);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -29,7 +26,7 @@ const DictionarieComponent = ({ clickRevertBack }) => {
             <TabList onChange={handleChange} aria-label="lab API tabs example">
               <Tab label="Rules" value="1" />
               <Tab label="View Dictionary" value="2" />
-              {role==="Admin" &&<Tab label="Modify Dictionary" value="3" />}
+              {role === "Admin" && <Tab label="Modify Dictionary" value="3" />}
             </TabList>
           </Box>
           <TabPanel value="1">
@@ -50,10 +47,11 @@ const DictionarieComponent = ({ clickRevertBack }) => {
           <TabPanel value="2">
             <ViewDictonary />
           </TabPanel>
-          {role==="Admin" &&
-          <TabPanel value="3">
-            <ModifyDictonary/>
-          </TabPanel>}
+          {role === "Admin" && (
+            <TabPanel value="3">
+              <ModifyDictonary />
+            </TabPanel>
+          )}
         </TabContext>
       </Box>
     </Paper>

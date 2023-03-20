@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import InputComponent from "./components/inputComponent";
 import OutputComponent from "./components/outputComponent";
@@ -13,9 +13,12 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { SetCorrectionTable } from "./reducers/correctionTable/CorrectionTableActions";
 
 function App() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [sidebarItems, setSidebarItems] = useState({
     input: true,
     output: false,
@@ -24,8 +27,6 @@ function App() {
   });
   const [parasContent, setParasContent] = useState([])
   const [paragraph, setParagraph] = useState("");
-  const [data, setdata] = useState([]);
-  const [table, setTable] = useState({});
   const key1 = Cookies.get("access_token_cookie");
   const key2 = Cookies.get("csrf_access_token");
   const [loading, setLoading] = useState(false);
@@ -62,7 +63,7 @@ function App() {
             })
           );
           setParasContent(data);
-          setTable(rowdata);
+          dispatch(SetCorrectionTable(rowdata));
           setSidebarItems({
             ...sidebarItems,
             output: true,
@@ -75,23 +76,18 @@ function App() {
         }).finally(()=>{
           setLoading(false);
         });
-      // setTable(await api.post("", { data }));
-      // setTable(await api.get(""));
+     
     } catch (e) {
       console.error(e);
     }
-    console.log("table", table);
+   
   };
 
 
   const Proceed = (narrativeFieldValue) => {
     console.log("narrative", narrativeFieldValue);
     setParagraph(narrativeFieldValue);
-    // console.log("paragraph", paragraph);
     const temp = narrativeFieldValue.split("\n").map(text => text+"\n");
-    console.log("temp", temp);
-    setdata(temp);
-    // console.log("splitdata", data);
     getCorrectionTable(temp);
   };
 
@@ -246,7 +242,6 @@ function App() {
               <OutputComponent
                 clickRevertBack={() => RevertBack()}
                 inputData={paragraph}
-                correctionTable={table}
                 parasContent={parasContent}
               />
             )}

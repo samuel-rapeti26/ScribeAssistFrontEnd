@@ -1,5 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
+import { useSelector } from 'react-redux';
 import {
   DataGrid,
   GridToolbarContainer,
@@ -19,6 +20,7 @@ import { Button } from "@mui/material";
 import axios from "axios";
 import Cookies from "js-cookie";
 import ItemsTable from "./ItemsTable";
+import userReducer from "../reducers/user";
 //ParagraphNum
 const data = {
   id: "5df3180a09ea16dc4b95f910",
@@ -63,6 +65,9 @@ const Summary = ({
   handleChange,
 }) => {
   // console.log("hi",selectedNarratives);
+  const { user: userStore } = useSelector(
+      (state) => state.userReducer
+  );
   const [selected, setSelected] = React.useState({});
   console.log("rowsData98", rowsData);
   const handleUpdateTable = () => {
@@ -79,9 +84,9 @@ const Summary = ({
         currentDate.getSeconds();
       word.push(rowsData[selectedNaratvies[i]].error);
       time.push(t);
-      user.push(sessionStorage.getItem("user"));
+      user.push(userStore);
     }
-    let temp = { word: word, time: time, user: user };
+    let temp = { word: word, time: time, user: userStore };
     // console.log("hiloo", temp);
     setSelected(temp);
 

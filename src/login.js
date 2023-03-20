@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import logo from "./assets/logo.png";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useDispatch } from "react-redux";
+import { SetRole, SetUser } from "./reducers/user/UserActions";
 
 function Login() {
   const navigate = useNavigate();
@@ -11,6 +13,7 @@ function Login() {
   const [Password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const dispatch = useDispatch();
   const callUserComponent = (event) => {
     setUserName(event.target.value);
     // console.log("user", userName);
@@ -21,7 +24,7 @@ function Login() {
     // console.log("pass", password);
   };
 
-  sessionStorage.setItem("user", User);
+  dispatch(SetUser(User));
   const api = axios.create({
     withCredentials: true,
     baseURL: "http://localhost:2000/userlogin",
@@ -36,7 +39,7 @@ function Login() {
       setLoading(true);
       const response = await api.post("", { User, Password });
       console.log("response", response);
-      sessionStorage.setItem("role", response.data.role);
+      dispatch(SetRole(response.data.role));
       if (response.data.message === "User Logged-in Successfully.") {
         navigate("/dashboard");
       } else {
@@ -51,7 +54,7 @@ function Login() {
 
   return (
     <div className="flex  flex-col items-center justify-center w-screen h-screen bg-gray-200 text-gray-700">
-      <img src={logo} style={{ width: "300px" }} />
+      <img src={logo} style={{ width: "300px" }} alt="logo" />
       <form
         className="flex flex-col bg-white rounded shadow-lg p-12 mt-6"
         action=""
@@ -73,7 +76,7 @@ function Login() {
           onChange={(event) => callPassComponent(event)}
         />
         <a
-          // href="./dashboard"\
+         
           style={{ cursor: "pointer" }}
           className="flex items-center justify-center h-12 px-6 w-64 bg-blue-600 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700"
           onClick={checkUser}

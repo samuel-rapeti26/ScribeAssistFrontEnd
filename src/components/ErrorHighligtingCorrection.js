@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { useSelector } from 'react-redux';
 import { Button } from "@mui/material";
 import ErrorsContent from "./ErrosContent";
 import SuggestionContent from "./SuggestionContent";
@@ -15,6 +16,11 @@ const ErrorHighligtingCorrection = ({
   setSelectedNarratives,
   parasContent,
 }) => {
+
+  const { user: userStore } = useSelector(
+      (state) => state.userReducer
+  );
+
   let rowsData = rows.map((row) => ({
     ...row,
     paraContent: parasContent[row.ParagraphNum - 1],
@@ -52,7 +58,7 @@ const ErrorHighligtingCorrection = ({
         currentDate.getSeconds();
       word.push(rows[selectedNaratvies[i]].error);
       time.push(t);
-      user.push(sessionStorage.getItem("user"));
+      user.push(userStore);
     }
     let temp = { word: word, time: time, user: user };
     // console.log("hiloo", temp);
