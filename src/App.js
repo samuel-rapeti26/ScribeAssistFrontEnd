@@ -8,10 +8,10 @@ import ManualPdf from "./assets/Smart Error Detector Tool_User Manual_V1.0.0.pdf
 import "./style.css";
 import { IconButton } from "@mui/material";
 import Cookies from "js-cookie";
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { SetCorrectionTable } from "./reducers/correctionTable/CorrectionTableActions";
@@ -25,7 +25,7 @@ function App() {
     rules: false,
     userManual: false,
   });
-  const [parasContent, setParasContent] = useState([])
+  const [parasContent, setParasContent] = useState([]);
   const [paragraph, setParagraph] = useState("");
   const key1 = Cookies.get("access_token_cookie");
   const key2 = Cookies.get("csrf_access_token");
@@ -59,7 +59,7 @@ function App() {
               EndPos: response.data.output.EndPos[key],
               Operation: response.data.output.Operation[key],
               FrontendAction: response.data.output.FrontendAction[key],
-              ParagraphNum: response.data.output.ParagraphNum[key]
+              ParagraphNum: response.data.output.ParagraphNum[key],
             })
           );
           setParasContent(data);
@@ -69,25 +69,25 @@ function App() {
             output: true,
             input: false,
           });
-          
         })
         .catch((error) => {
           console.log("error", error);
-        }).finally(()=>{
+        })
+        .finally(() => {
           setLoading(false);
         });
-     
     } catch (e) {
       console.error(e);
     }
-   
   };
-
 
   const Proceed = (narrativeFieldValue) => {
     console.log("narrative", narrativeFieldValue);
     setParagraph(narrativeFieldValue);
-    const temp = narrativeFieldValue.split("\n").map(text => text).filter(text => (text !== "\n" && text.trim() !== '') );
+    const temp = narrativeFieldValue
+      .split("\n")
+      .map((text) => text)
+      .filter((text) => text !== "\n" && text.trim() !== "");
     getCorrectionTable(temp);
   };
 
@@ -109,7 +109,7 @@ function App() {
   };
   const handleLogout = () => {
     localStorage.clear();
-    navigate("/", { replace: true })
+    navigate("/", { replace: true });
   };
   return (
     <div className="">
@@ -118,7 +118,7 @@ function App() {
           <div className="flex items-center">
             <div className="w-2/12">
               <h1 className="logo font-bold text-white text-xl text-start text-uppercase">
-                Scribe Assist
+                Scribe Assist Demo
               </h1>
             </div>
             <div className="w-10/12">
@@ -135,22 +135,22 @@ function App() {
                   <AccountCircle className="text-white" />
                 </IconButton>
                 <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
-              </Menu>
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                >
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                </Menu>
               </div>
             </div>
           </div>
@@ -267,9 +267,11 @@ function App() {
         </div>
       </div>
       <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={loading}
-        onClick={()=>{console.log("test98")}}
+        onClick={() => {
+          console.log("test98");
+        }}
       >
         <CircularProgress color="inherit" />
       </Backdrop>
