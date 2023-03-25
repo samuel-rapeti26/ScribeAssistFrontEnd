@@ -34,7 +34,7 @@ const ErrorsContent = ({ paragraphs, parasContent }) => {
     setHighlightedErrors(map);
   };
   return (
-    <div className="outputBoxHeight">
+    <div className="max-h-96 overflow-auto">
       {parasContent.map((paragraph, i) => (
         <span
           key={i}

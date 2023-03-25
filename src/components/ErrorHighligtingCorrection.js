@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import { Button } from "@mui/material";
 import ErrorsContent from "./ErrosContent";
 import SuggestionContent from "./SuggestionContent";
@@ -8,18 +8,13 @@ import FinalNarrative from "./FinalNarrative";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-import "../assets/errorHighlightCorrection.css";
-
 const ErrorHighligtingCorrection = ({
   rows,
   selectedNaratvies,
   setSelectedNarratives,
   parasContent,
 }) => {
-
-  const { user: userStore } = useSelector(
-      (state) => state.userReducer
-  );
+  const { user: userStore } = useSelector((state) => state.userReducer);
 
   let rowsData = rows.map((row) => ({
     ...row,
@@ -29,16 +24,19 @@ const ErrorHighligtingCorrection = ({
   // console.log("hi", selectedNaratvies);
 
   const [selected, setSelected] = React.useState({});
+  const [finalStep, setFinalStep] = React.useState(false)
   const [correctOutput, setCorrectOutput] = useState([]);
   const [finalisedNarratives, setFinalisedNarratives] = useState([]);
 
   const correctOutputHandle = () => {
+    setFinalStep(false);
     if (selectedNaratvies.length > 0) {
       setFinalisedNarratives(selectedNaratvies);
     }
   };
 
   const onFinaliseClick = () => {
+    setFinalStep(true);
     setCorrectOutput(finalisedNarratives);
   };
 
@@ -147,22 +145,36 @@ const ErrorHighligtingCorrection = ({
               maxHeight: "500px",
             }}
           />
-          <div className="w-full flex justify-end items-center px-4 gap-2">
-            <Button variant="contained" onClick={correctOutputHandle}>
-              {" "}
-              Correct output{" "}
+          <div className="flex items-center justify-between w-full">
+            <Button
+              variant="outlined"
+              onClick={correctOutputHandle}
+              size="small"
+            >
+              go To Input
             </Button>
-            <Button variant="contained" onClick={handleUpdateTable}>
-              {" "}
-              Update dict{" "}
-            </Button>
-            {/* <Button variant="contained"> Revert back </Button> */}
+            <div className="flex justify-end items-center px-4 gap-2">
+              <Button
+                variant="contained"
+                onClick={correctOutputHandle}
+                size="small"
+              >
+                Correct output
+              </Button>
+              <Button
+                variant="contained"
+                onClick={handleUpdateTable}
+                size="small"
+              >
+                Update dict
+              </Button>
+              {/* <Button variant="contained"> Revert back </Button> */}
+            </div>
           </div>
         </div>
         <div className="flex flex-col gap-4">
           <div
             className="shadow-md bg-white p-2 flex flex-col gap-2 "
-            style={{ height: " -webkit-fill-available" }}
           >
             <h2 className="text-xl text-gray-600 border-b pb-2">
               Error Highligted
@@ -171,8 +183,8 @@ const ErrorHighligtingCorrection = ({
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1  lg:grid-cols-2 gap-4 h-full">
-        {!!finalisedNarratives.length && (
+      <div className="grid grid-cols-1">
+        {!!finalisedNarratives.length && !finalStep && (
           <div className="flex flex-col gap-4">
             <div className="shadow-md bg-white p-2 flex flex-col gap-2">
               <h2 className="text-xl text-gray-600 border-b pb-2">
@@ -195,7 +207,7 @@ const ErrorHighligtingCorrection = ({
             </div>
           </div>
         )}
-        {!!correctOutput.length && (
+        {!!correctOutput.length && finalStep && (
           <div className="shadow-md bg-white p-2 flex flex-col gap-2">
             <h2 className="text-xl text-gray-600 border-b pb-2">
               Final Narrative

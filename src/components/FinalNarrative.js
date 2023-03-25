@@ -117,7 +117,7 @@ const FinalNarrative = ({ paragraphs, selectedNaratvies, parasContent }) => {
 
   return (
     <>
-      <div ref={parentRef} className="outputBoxHeight">
+      <div ref={parentRef} className=" max-h-96 overflow-auto">
         {parasContent.map((paragraph, i) => (
           <span
             key={i}

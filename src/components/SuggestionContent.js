@@ -48,7 +48,7 @@ const SuggestionContent = ({ paragraphs, selectedNaratvies, parasContent }) => {
     setHighlightedSuggestions(map);
   };
   return (
-    <div className="outputBoxHeight">
+    <div className=" max-h-96 overflow-auto">
       {parasContent.map((paragraph, i) => (
         <span
           key={i}
