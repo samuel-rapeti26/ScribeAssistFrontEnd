@@ -13,6 +13,7 @@ const ErrorHighligtingCorrection = ({
   selectedNaratvies,
   setSelectedNarratives,
   parasContent,
+  goInputHandler
 }) => {
   const { user: userStore } = useSelector((state) => state.userReducer);
 
@@ -148,7 +149,7 @@ const ErrorHighligtingCorrection = ({
           <div className="flex items-center justify-between w-full">
             <Button
               variant="outlined"
-              onClick={correctOutputHandle}
+              onClick={goInputHandler}
               size="small"
             >
               go To Input

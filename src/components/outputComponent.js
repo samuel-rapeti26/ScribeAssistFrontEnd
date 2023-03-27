@@ -22,6 +22,7 @@ const OutputComponent = ({ clickRevertBack, parasContent }) => {
           selectedNaratvies={selectedNaratvies}
           setSelectedNarratives={setSelectedNarratives}
           parasContent={parasContent}
+          goInputHandler={clickRevertBack}
         />
       </div>
     </Paper>
