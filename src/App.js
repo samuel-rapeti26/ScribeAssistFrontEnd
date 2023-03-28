@@ -97,9 +97,10 @@ function App() {
 
   const RevertBack = () => {
     setSidebarItems({
-      ...sidebarItems,
       output: false,
       input: true,
+      rules: false,
+      userManual: false,
     });
   };
   const [anchorEl, setAnchorEl] = useState(null);
@@ -120,7 +121,10 @@ function App() {
           <div className="grid grid-cols-3 gap-4">
             <div className="col-span-2">
               <div className="flex items-center gap-4">
-                <h1 className="logo font-bold text-white text-2xl text-start text-uppercase">
+                <h1
+                  className="logo font-bold text-white text-2xl text-start text-uppercase cursor-pointer"
+                  onClick={RevertBack}
+                >
                   Scribe Assist
                 </h1>
                 <div className="flex p-4 gap-4">

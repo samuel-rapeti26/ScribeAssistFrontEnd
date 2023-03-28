@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { useSelector } from "react-redux";
 import { Button } from "@mui/material";
-import ErrorsContent from "./ErrosContent";
+import ErrorsContent from "./ErrorsContent";
 import SuggestionContent from "./SuggestionContent";
 import FinalNarrative from "./FinalNarrative";
 import axios from "axios";
@@ -178,9 +178,9 @@ const ErrorHighligtingCorrection = ({
             className="shadow-md bg-white p-2 flex flex-col gap-2 "
           >
             <h2 className="text-xl text-gray-600 border-b pb-2">
-              Error Highligted
+              Error Highlighted
             </h2>
-            <ErrorsContent paragraphs={rowsData} parasContent={parasContent} />
+            <ErrorsContent paragraphs={parasContent} parasContent={rowsData} />
           </div>
         </div>
       </div>
